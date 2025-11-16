@@ -155,17 +155,14 @@ app.post("/api/contact/submit", async (req, res) => {
 // 🌍 Root Route
 // -------------------------
 app.get("/", (req, res) => {
-  res.json({ 
-    status: "ok", 
-    message: "True Prime Digital Backend LIVE" 
-  });
+  res.json({ message: "True Prime Backend LIVE" });
 });
 
 // -------------------------
 // ❌ 404 Handler - Return JSON, not HTML
 // -------------------------
 app.use((req, res) => {
-  res.status(404).json({ success: false, error: "Route not found" });
+  res.status(404).json({ error: "Route not found", route: req.originalUrl });
 });
 
 // -------------------------
