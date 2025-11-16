@@ -1,9 +1,11 @@
 const express = require("express");
+const router = express.Router();
 const { submitConsultation } = require("../controllers/consultationController.js");
 
-const router = express.Router();
+// POST /api/consultation/book - Book consultation (matches frontend)
+router.post("/book", submitConsultation);
 
-// POST /api/consultation/create - Create consultation
+// POST /api/consultation/create - Create consultation (alternative)
 router.post("/create", submitConsultation);
 
 // POST /api/consultation - Alternative endpoint

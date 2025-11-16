@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   createAppointment,
+  getAppointments,
   getAppointmentsByEmail,
 } = require("../controllers/appointmentController");
 
@@ -12,19 +13,7 @@ router.post("/create", createAppointment);
 router.post("/", createAppointment);
 
 // GET /api/appointments/list?email=... - Get appointments by email (matches frontend)
-router.get("/list", async (req, res) => {
-  try {
-    const { email } = req.query;
-    if (!email) {
-      return res.status(400).json({ success: false, error: "Email query parameter is required" });
-    }
-    const getAppointmentsByEmail = require("../controllers/appointmentController").getAppointmentsByEmail;
-    req.params = { email };
-    return getAppointmentsByEmail(req, res);
-  } catch (error) {
-    return res.status(500).json({ success: false, error: error.message });
-  }
-});
+router.get("/list", getAppointments);
 
 // GET /api/appointments/:email - Get appointments by email (route param)
 router.get("/:email", getAppointmentsByEmail);

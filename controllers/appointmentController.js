@@ -119,6 +119,27 @@ exports.createAppointment = async (req, res) => {
   }
 };
 
+exports.getAppointments = async (req, res) => {
+  try {
+    const { email } = req.query;
+
+    if (!email) {
+      return res.status(400).json({ 
+        success: false, 
+        error: "Email query parameter is required" 
+      });
+    }
+
+    const appointments = await Appointment.find({ email }).sort({
+      createdAt: -1,
+    });
+
+    return res.status(200).json({ success: true, appointments });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
 exports.getAppointmentsByEmail = async (req, res) => {
   try {
     const { email } = req.params;

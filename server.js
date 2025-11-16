@@ -155,7 +155,27 @@ app.post("/api/contact/submit", async (req, res) => {
 // 🌍 Root Route
 // -------------------------
 app.get("/", (req, res) => {
-  res.send("✅ True Prime Digital Backend is LIVE on Render!");
+  res.json({ 
+    success: true, 
+    message: "True Prime Digital Backend is LIVE on Render!",
+    endpoints: {
+      appointments: "/api/appointments",
+      consultation: "/api/consultation",
+      contact: "/api/contact"
+    }
+  });
+});
+
+// -------------------------
+// ❌ 404 Handler - Return JSON, not HTML
+// -------------------------
+app.use((req, res) => {
+  res.status(404).json({ 
+    success: false, 
+    error: "Route not found",
+    path: req.path,
+    method: req.method
+  });
 });
 
 // -------------------------
