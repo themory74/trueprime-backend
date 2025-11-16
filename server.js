@@ -165,10 +165,7 @@ app.get("/", (req, res) => {
 // ❌ 404 Handler - Return JSON, not HTML
 // -------------------------
 app.use((req, res) => {
-  res.status(404).json({ 
-    success: false, 
-    error: "Route not found"
-  });
+  res.status(404).json({ success: false, error: "Route not found" });
 });
 
 // -------------------------

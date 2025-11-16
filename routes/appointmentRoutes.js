@@ -3,19 +3,12 @@ const router = express.Router();
 const {
   createAppointment,
   getAppointments,
-  getAppointmentsByEmail,
 } = require("../controllers/appointmentController");
 
-// POST /api/appointments/create - Create appointment (matches frontend)
-router.post("/create", createAppointment);
-
-// POST /api/appointments - Alternative endpoint
-router.post("/", createAppointment);
-
-// GET /api/appointments/list?email=... - Get appointments by email (matches frontend)
+// GET /api/appointments/list?email=... - Get appointments (optional email filter)
 router.get("/list", getAppointments);
 
-// GET /api/appointments/:email - Get appointments by email (route param)
-router.get("/:email", getAppointmentsByEmail);
+// POST /api/appointments/create - Create appointment
+router.post("/create", createAppointment);
 
 module.exports = router;
