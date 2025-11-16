@@ -102,3 +102,24 @@ exports.submitConsultation = async (req, res) => {
     });
   }
 };
+
+exports.getConsultations = async (req, res) => {
+  try {
+    const { email } = req.query;
+
+    if (!email) {
+      return res.status(400).json({ 
+        success: false, 
+        error: "Email query parameter is required" 
+      });
+    }
+
+    const consultations = await Consultation.find({ emailAddress: email }).sort({
+      createdAt: -1,
+    });
+
+    return res.status(200).json({ success: true, consultations });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};

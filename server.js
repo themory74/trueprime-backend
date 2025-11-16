@@ -156,13 +156,8 @@ app.post("/api/contact/submit", async (req, res) => {
 // -------------------------
 app.get("/", (req, res) => {
   res.json({ 
-    success: true, 
-    message: "True Prime Digital Backend is LIVE on Render!",
-    endpoints: {
-      appointments: "/api/appointments",
-      consultation: "/api/consultation",
-      contact: "/api/contact"
-    }
+    status: "ok", 
+    message: "True Prime Digital Backend LIVE" 
   });
 });
 
@@ -172,9 +167,7 @@ app.get("/", (req, res) => {
 app.use((req, res) => {
   res.status(404).json({ 
     success: false, 
-    error: "Route not found",
-    path: req.path,
-    method: req.method
+    error: "Route not found"
   });
 });
 
